@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Taskflow - a calm, focused task manager." />
+    <title>Taskflow — Stay on top of what matters</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" id="sidebar">
+        <div class="brand"><span class="brand-mark">✓</span><span>taskflow</span></div>
+        <button class="add-task sidebar-add" id="openTaskModal"><span>+</span> Add task</button>
+        <nav class="nav" aria-label="Task views">
+          <button class="nav-item active" data-filter="all"><span>☷</span> All tasks <b id="allCount">0</b></button>
+          <button class="nav-item" data-filter="today"><span>☀</span> Today <b id="todayCount">0</b></button>
+          <button class="nav-item" data-filter="upcoming"><span>◷</span> Upcoming</button>
+          <button class="nav-item" data-filter="completed"><span>✓</span> Completed</button>
+        </nav>
+        <div class="projects-head"><span>PROJECTS</span><button id="addProject" aria-label="Add project">+</button></div>
+        <div class="projects" id="projects"></div>
+        <div class="sidebar-bottom"><span class="avatar">AM</span><div><strong>Alex Morgan</strong><small>Free plan</small></div><button class="more" aria-label="Profile options">•••</button></div>
+      </aside>
+      <main>
+        <header class="mobile-head"><button id="menuButton" aria-label="Open menu">☰</button><div class="brand"><span class="brand-mark">✓</span>taskflow</div></header>
+        <section class="topbar">
+          <div><p class="eyebrow" id="dateText"></p><h1 id="viewTitle">All tasks</h1></div>
+          <div class="top-actions"><button class="icon-button" id="themeToggle" aria-label="Toggle theme">◐</button><button class="add-task" id="openTaskModal2"><span>+</span> Add task</button></div>
+        </section>
+        <section class="summary" aria-label="Task summary">
+          <article><div class="summary-icon peach">☀</div><div><span>Due today</span><strong id="dueCount">0</strong></div></article>
+          <article><div class="summary-icon blue">↗</div><div><span>In progress</span><strong id="progressCount">0</strong></div></article>
+          <article><div class="summary-icon green">✓</div><div><span>Completed</span><strong id="completedCount">0</strong></div></article>
+          <article class="focus-card"><div><span>Daily focus</span><strong id="focusText">0 of 0 done</strong></div><div class="ring"><span id="focusPercent">0%</span></div></article>
+        </section>
+        <section class="task-area">
+          <div class="task-toolbar"><div class="tabs"><button class="tab active" data-priority="all">All</button><button class="tab" data-priority="high">High priority</button><button class="tab" data-priority="medium">Medium</button></div><button class="sort" id="sortButton">⇅ <span>Sort: Due date</span></button></div>
+          <div class="task-list" id="taskList"></div>
+          <div class="empty-state" id="emptyState" hidden><div>✦</div><h2>Nothing here yet</h2><p>Add a task and make your day a little lighter.</p><button class="add-task" id="emptyAdd">+ Add your first task</button></div>
+        </section>
+      </main>
+    </div>
+    <div class="modal-backdrop" id="modalBackdrop" hidden>
+      <form class="modal" id="taskForm">
+        <div class="modal-head"><h2 id="modalTitle">Add a task</h2><button type="button" id="closeModal" aria-label="Close">×</button></div>
+        <label>Task name<input required id="taskName" placeholder="What needs to get done?" maxlength="100" /></label>
+        <div class="form-row"><label>Due date<input type="date" id="taskDate" /></label><label>Priority<select id="taskPriority"><option value="medium">Medium</option><option value="high">High</option><option value="low">Low</option></select></label></div>
+        <label>Project<select id="taskProject"></select></label>
+        <div class="form-actions"><button type="button" class="cancel" id="cancelTask">Cancel</button><button class="save" type="submit">Save task</button></div>
+      </form>
+    </div>
+    <template id="taskTemplate"><article class="task"><button class="check" aria-label="Mark task complete"></button><div class="task-content"><h3></h3><div class="task-meta"><span class="due"></span><span class="project-tag"></span></div></div><span class="priority"></span><button class="task-menu" aria-label="Task options">•••</button></article></template>
+    <script src="app.js"></script>
+  </body>
+</html>
